@@ -33,6 +33,9 @@ OLLAMA_KEEP_ALIVE 2h
 OLLAMA_MODELS X:\OllamaModels
 OLLAMA_ORIGINS  *
 ```
+![image](https://github.com/kenneth7198/TheInfiniteGame/blob/main/images/ollama_env.png)
+
+
 8. 回到命令提示字元視窗中，透過指令方式下載以下的LLM大語言模型
 ```
 ollama pull qwen2.5:7b-instruct-q4_K_M
