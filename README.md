@@ -1,6 +1,7 @@
 # The Infinite Game
 此專案基於 Generative AgentsCN 並原始的作者為 Generative Agents 與 Wounderland 專案
 原始的研究論文如下：
+## Generative Agents: Interactive Simulacra of Human Behavior : https://arxiv.org/abs/2304.03442
 ## https://github.com/joonspk-research/generative_agents
 ## https://github.com/x-glacier/GenerativeAgentsCN
 ## https://github.com/Archermmt/wounderland
