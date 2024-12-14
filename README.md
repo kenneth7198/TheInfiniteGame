@@ -1,3 +1,5 @@
+![image](https://github.com/kenneth7198/TheInfiniteGame/blob/main/images/logo.png)
+
 # The Infinite Game
 此專案基於 Generative AgentsCN 並原始的作者為 Generative Agents 與 Wounderland 專案
 此專案為清華大學 許素朱教授在 電資學院 資訊應用所開設的【網路藝術】課程期末作業，此作業探討AI與AI之間虛擬數位社群關係變化，試圖透過一個角色進行改良成具有【欺騙、竄改、造謠、鼓舞投資、以及散播數位謠言的AI人工代理角色】，經過這個AI代理人，在虛擬數位社群內模擬此AI角色是否能操弄整個虛擬村莊的AI之間的關係變化，最終期望在這個過程中產生出AI領袖的人格特質出來。
