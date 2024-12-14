@@ -1,28 +1,28 @@
 ![image](https://github.com/kenneth7198/TheInfiniteGame/blob/main/images/logo.png)
 
 # The Infinite Show
-此專案基於 Generative AgentsCN 並原始的作者為 Generative Agents 與 Wounderland 專案
-此專案為清華大學 許素朱教授在 電資學院 資訊應用所開設的【網路藝術】課程期末作業，此作業探討AI與AI之間虛擬數位社群關係變化，試圖透過一個角色進行改良成具有【欺騙、竄改、造謠、鼓舞投資、以及散播數位謠言的AI人工代理角色】，經過這個AI代理人，在虛擬數位社群內模擬此AI角色是否能操弄整個虛擬村莊的AI之間的關係變化，最終期望在這個過程中產生出AI領袖的人格特質出來。
+此專案基於 Generative AgentsCN 並原始的作者為 Generative Agents 與 Wounderland 專案。
+此專案為清華大學許素朱教授在清大電資學院資訊應用所開設的【網路藝術】課程期末作業，此作業探討AI與AI之間虛擬數位社群關係變化，試圖透過一個角色進行改良成具有【欺騙、竄改、造謠、鼓舞投資、以及散播數位謠言的AI人工代理角色】，經過這個AI代理人，在虛擬數位社群內模擬此AI角色是否能操弄整個虛擬村莊的AI之間的關係變化，最終期望在這個過程中產生出AI領袖的人格特質出來。
 
-原始的研究論文如下：
-## Generative Agents: Interactive Simulacra of Human Behavior : https://arxiv.org/abs/2304.03442
+# 原始的研究論文如下：
+### Generative Agents: Interactive Simulacra of Human Behavior : https://arxiv.org/abs/2304.03442
 
 # 原始的github來源：
-## https://github.com/joonspk-research/generative_agents
-## https://github.com/x-glacier/GenerativeAgentsCN
-## https://github.com/Archermmt/wounderland
+### https://github.com/joonspk-research/generative_agents
+### https://github.com/x-glacier/GenerativeAgentsCN
+### https://github.com/Archermmt/wounderland
 
 
 # clone原始碼
-1. git clone https://github.com/kenneth7198/TheInfiniteGame.git
-2. cd theinfinitegame
+1. git clone https://github.com/kenneth7198/TheInfiniteShow.git
+2. cd TheInfiniteShow
 
 
 # 基本安裝環境
 1. 安裝Anaconda
-2. 建立Anaconda虛擬環境，名為the_infiite_game，並選用python 3.11.11
-3. 啟動the_infinite_game的虛擬環境
-4. cd到clone下來的資料夾，在TheInfiniteGame資料夾內，輸入
+2. 建立Anaconda虛擬環境，名為the_infinite_show，並選用python 3.11.11
+3. 啟動the_infinite_show的虛擬環境，使用terminal開啟
+4. cd到clone下來的資料夾，在TheInfiniteShow資料夾內，輸入：
 ```
 pip install -r requirements.txt
 ```
@@ -38,7 +38,7 @@ OLLAMA_ORIGINS  *
 ![image](https://github.com/kenneth7198/TheInfiniteGame/blob/main/images/ollama_env.png)
 
 
-8. 回到命令提示字元視窗中，透過指令方式下載以下的LLM大語言模型
+8. 回到命令提示字元視窗中，透過指令方式下載以下的LLM大語言模型，這邊採用的是阿里巴巴的Qwen 2.5(通義千問) : https://github.com/QwenLM/Qwen
 ```
 ollama pull qwen2.5:7b-instruct-q4_K_M
 ollama pull bge-m3:latest
@@ -50,7 +50,7 @@ ollama serve
   
 # 運作虛擬小鎮
 
-切換到Anaconda虛擬環境下，切換到generative_agents資料夾，並用以下指令啟動虛擬小鎮的計算
+切換到原本的TheInfiniteShow的Anaconda虛擬環境下，切換到generative_agents資料夾，並用以下指令啟動虛擬小鎮的計算
 ```
 cd generative_agents
 python start.py --name infinite-test --start "20241214-08:00" --step 10 --stride 10
