@@ -1,5 +1,7 @@
 # The Infinite Game
 此專案基於 Generative AgentsCN 並原始的作者為 Generative Agents 與 Wounderland 專案
+此專案為清華大學 許素朱教授在 電資學院 資訊應用所開設的【網路藝術】課程期末作業，此作業探討AI與AI之間虛擬數位社群關係變化，試圖透過一個角色進行改良成具有【欺騙、竄改、造謠、鼓舞投資、以及散播數位謠言的AI人工代理角色】，經過這個AI代理人，在虛擬數位社群內模擬此AI角色是否能操弄整個虛擬村莊的AI之間的關係變化，最終期望在這個過程中產生出AI領袖的人格特質出來。
+
 原始的研究論文如下：
 ## Generative Agents: Interactive Simulacra of Human Behavior : https://arxiv.org/abs/2304.03442
 
@@ -7,6 +9,12 @@
 ## https://github.com/joonspk-research/generative_agents
 ## https://github.com/x-glacier/GenerativeAgentsCN
 ## https://github.com/Archermmt/wounderland
+
+
+# clone原始碼
+1. git clone https://github.com/kenneth7198/TheInfiniteGame.git
+2. cd theinfinitegame
+
 
 # 基本安裝環境
 1. 安裝Anaconda
@@ -25,10 +33,38 @@ OLLAMA_KEEP_ALIVE 2h
 OLLAMA_MODELS X:\OllamaModels
 OLLAMA_ORIGINS  *
 ```
-8. 
+8. 回到命令提示字元視窗中，透過指令方式下載以下的兩個LLM大語言模型
+```
+ollma pull qwen2.5:7b-instruct-q4_K_M
+ollama pull bge-m3:latest
+```
+9. 等待下載完畢之後，用以下的指令啟動Ollama大語言模型運作
+```
+ollama serve
+```
+  
+# 運作虛擬小鎮
 
+切換到Anaconda虛擬環境下，切換到generative_agents資料夾，並用以下指令啟動虛擬小鎮的計算
+```
+cd generative_agents
+python start.py --name infinite-test --start "20241214-08:00" --step 10 --stride 10
+```
+參數說明：
+* name參數後面加的是一個用英文組合數字組成的虛擬小鎮名稱
+* start參數後面是設置小鎮的起始時間點
+* step參數是迭代幾次後停止運作，設置10預計要跑1小時多
+* stride參數是設置每一次時間運作的累計方式，設置10等於9:00 9:10 9:20 ...
 
+# 回放過程 
+1. 在剛剛的虛擬環境下輸入以下指令，壓縮infinite-test的虛擬小鎮運算過後的數據
+```
+python compress.py --name infinite-test
+```
 
-# Install
-1. git clone https://github.com/kenneth7198/TheInfiniteGame.git
-2. 
+2. 回放infinite-test虛擬小鎮的過程
+```
+python replay.py
+```
+
+3. 開啟網頁 http://127.0.0.1:5000/?name=infinite-test 看到虛擬小鎮內各個居民活動過程
