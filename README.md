@@ -35,7 +35,7 @@ OLLAMA_ORIGINS  *
 ```
 8. 回到命令提示字元視窗中，透過指令方式下載以下的兩個LLM大語言模型
 ```
-ollma pull qwen2.5:7b-instruct-q4_K_M
+ollama pull qwen2.5:7b-instruct-q4_K_M
 ollama pull bge-m3:latest
 ```
 9. 等待下載完畢之後，用以下的指令啟動Ollama大語言模型運作
