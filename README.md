@@ -37,13 +37,14 @@ OLLAMA_ORIGINS  *
 ```
 ![image](https://github.com/kenneth7198/TheInfiniteGame/blob/main/images/ollama_env.png)
 
+# 下載&運作LLM 大語言模型，重開機後仍需重新下載
 
-8. 回到命令提示字元視窗中，透過指令方式下載以下的LLM大語言模型，這邊採用的是阿里巴巴的Qwen 2.5(通義千問) : https://github.com/QwenLM/Qwen
+1. 回到命令提示字元視窗中，透過指令方式下載以下的LLM大語言模型，這邊採用的是阿里巴巴的Qwen 2.5(通義千問) : https://github.com/QwenLM/Qwen
 ```
 ollama pull qwen2.5:7b-instruct-q4_K_M
 ollama pull bge-m3:latest
 ```
-9. 等待下載完畢之後，用以下的指令啟動Ollama大語言模型運作
+2. 等待下載完畢之後，用以下的指令啟動Ollama大語言模型運作
 ```
 ollama serve
 ```
