@@ -30,11 +30,13 @@ pip install -r requirements.txt
 6. 安裝後開一個新的命令提示字元視窗，輸入ollama指令看看有沒成功安裝或是否可以呼叫
 7. 開啟系統內容的"編輯系統環境變數"，在進階頁籤點選"環境變數"，然後在系統變數中新增以下的變數與值:
 ```
-OLLAMA_HOST   0.0.0.0
-OLLAMA_KEEP_ALIVE 2h
-OLLAMA_MODELS X:\OllamaModels
-OLLAMA_ORIGINS  *
+OLLAMA_HOST  = 0.0.0.0
+OLLAMA_KEEP_ALIVE = 2h
+OLLAMA_MODELS = C:\OllamaModels
+OLLAMA_ORIGINS  = *
 ```
+OllamaModels可設置自己PC有空間的磁碟即可
+
 ![image](https://github.com/kenneth7198/TheInfiniteGame/blob/main/images/ollama_env.png)
 
 # 下載&運作LLM 大語言模型，重開機後仍需重新下載

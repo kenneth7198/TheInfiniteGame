@@ -1,0 +1,1 @@
+{"index_store/data": {"3a0a6331-d20c-4800-a60e-ae4bd90d7e8c": {"__type__": "vector_store", "__data__": "{\"index_id\": \"3a0a6331-d20c-4800-a60e-ae4bd90d7e8c\", \"summary\": null, \"nodes_dict\": {\"node_0\": \"node_0\", \"node_1\": \"node_1\", \"node_2\": \"node_2\"}, \"doc_id_dict\": {}, \"embeddings_dict\": {}}"}}}
