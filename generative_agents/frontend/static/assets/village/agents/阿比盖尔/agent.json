@@ -2,8 +2,8 @@
   "name": "阿比盖尔",
   "portrait": "assets/village/agents/阿比盖尔/portrait.png",
   "coord": [
-    36,
-    18
+    37,
+    61
   ],
   "currently": "阿比盖尔正在追查一个刑事案件。她也在尝试不同的工具和技术来搜集证据。",
   "scratch": {

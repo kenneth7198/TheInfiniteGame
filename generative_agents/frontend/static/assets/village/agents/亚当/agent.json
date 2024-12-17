@@ -2,8 +2,8 @@
   "name": "亚当",
   "portrait": "assets/village/agents/亚当/portrait.png",
   "coord": [
-    20,
-    65
+    17,
+    31
   ],
   "currently": "亚当正在搜集关于一新案件的资料，才能在法庭上为委托人辩护。他也很好奇谁将参加下个月的地方市长选举。",
   "scratch": {

@@ -2,8 +2,8 @@
   "name": "瑞恩",
   "portrait": "assets/village/agents/瑞恩/portrait.png",
   "coord": [
-    65,
-    19
+    38,
+    62
   ],
   "currently": "瑞恩正在撰写新的新闻稿。他也在调查选举在小镇上带来的动静，以获得独家新闻。",
   "scratch": {

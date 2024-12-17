@@ -2,8 +2,8 @@
   "name": "汤姆",
   "portrait": "assets/village/agents/汤姆/portrait.png",
   "coord": [
-    73,
-    74
+    27,
+    17
   ],
   "currently": "汤姆和他的妻子简住在一起，负责管理商店的日常运营，并帮助顾客完成订单。汤姆对下个月即将举行的地方市长选举也很感兴趣。他不喜欢山姆。",
   "scratch": {
