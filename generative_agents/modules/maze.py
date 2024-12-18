@@ -126,7 +126,6 @@ class Maze:
                 continue  # 跳过没有 'coord' 的数据
 
             x, y = tile.pop("coord")
-            print(f"Coord value: x={x}, y={y}")
             self.tiles[y][x] = Tile((x, y), config["world"], address_keys, **tile)
 
 
