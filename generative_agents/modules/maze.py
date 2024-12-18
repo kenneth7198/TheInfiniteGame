@@ -139,41 +139,24 @@ class Maze:
         self.logger = logger
 
     def find_path(self, src_coord, dst_coord, retries=3):
-        """
-        Find a path from src_coord to dst_coord. If the path is blocked, retry with new coordinates.
-
-        Args:
-            src_coord (tuple): Source coordinate (x, y).
-            dst_coord (tuple): Destination coordinate (x, y).
-            retries (int): Number of retries allowed if no path is found.
-
-        Returns:
-            list: List of coordinates representing the path.
-
-        Raises:
-            ValueError: If no path can be found after retries.
-        """
         attempt = 0
         while attempt <= retries:
             try:
-                # 检查目标坐标是否有效
                 if not (0 <= dst_coord[0] < self.maze_width and 0 <= dst_coord[1] < self.maze_height):
                     raise ValueError(f"Invalid destination coordinate: {dst_coord}. Out of bounds.")
                 tile = self.tile_at(dst_coord)
                 if tile.collision:
                     raise ValueError(f"Destination coordinate {dst_coord} is not reachable (collision).")
 
-                # 初始化地图
                 map = [[0 if not self.tile_at((x, y)).collision else -1 for x in range(self.maze_width)] for y in range(self.maze_height)]
                 frontier, visited = [src_coord], set()
                 map[src_coord[1]][src_coord[0]] = 1
 
-                # 路径查找
                 while map[dst_coord[1]][dst_coord[0]] == 0:
                     new_frontier = []
                     for f in frontier:
                         for c in self.get_around(f):
-                            if map[c[1]][c[0]] == 0 and c not in visited:
+                            if 0 <= c[0] < self.maze_width and 0 <= c[1] < self.maze_height and map[c[1]][c[0]] == 0:
                                 map[c[1]][c[0]] = map[f[1]][f[0]] + 1
                                 new_frontier.append(c)
                                 visited.add(c)
@@ -181,7 +164,6 @@ class Maze:
                         raise ValueError(f"No path found from {src_coord} to {dst_coord}")
                     frontier = new_frontier
 
-                # 回溯路径
                 step = map[dst_coord[1]][dst_coord[0]]
                 path = [dst_coord]
                 while step > 1:
@@ -191,9 +173,9 @@ class Maze:
                             break
                     step -= 1
                 return path[::-1]
-            except ValueError:
+            except ValueError as e:
+                print(f"DEBUG: Pathfinding failed for src: {src_coord}, dst: {dst_coord}. Error: {e}")
                 attempt += 1
-                print(f"Pathfinding failed. Retrying... (Attempt {attempt}/{retries})")
                 dst_coord = self.get_random_valid_destination(src_coord)
 
         raise ValueError(f"Failed to find path after {retries} retries.")
