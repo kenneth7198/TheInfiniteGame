@@ -156,22 +156,24 @@ class Maze:
         attempt = 0
         while attempt <= retries:
             try:
-                # Initialize map and variables
-                map = [[0 for _ in range(self.maze_width)] for _ in range(self.maze_height)]
+                # 检查目标坐标是否有效
+                if not (0 <= dst_coord[0] < self.maze_width and 0 <= dst_coord[1] < self.maze_height):
+                    raise ValueError(f"Invalid destination coordinate: {dst_coord}. Out of bounds.")
+                tile = self.tile_at(dst_coord)
+                if tile.collision:
+                    raise ValueError(f"Destination coordinate {dst_coord} is not reachable (collision).")
+
+                # 初始化地图
+                map = [[0 if not self.tile_at((x, y)).collision else -1 for x in range(self.maze_width)] for y in range(self.maze_height)]
                 frontier, visited = [src_coord], set()
                 map[src_coord[1]][src_coord[0]] = 1
 
-                # Pathfinding loop
+                # 路径查找
                 while map[dst_coord[1]][dst_coord[0]] == 0:
                     new_frontier = []
                     for f in frontier:
                         for c in self.get_around(f):
-                            if (
-                                0 <= c[0] < self.maze_width
-                                and 0 <= c[1] < self.maze_height
-                                and map[c[1]][c[0]] == 0
-                                and c not in visited
-                            ):
+                            if map[c[1]][c[0]] == 0 and c not in visited:
                                 map[c[1]][c[0]] = map[f[1]][f[0]] + 1
                                 new_frontier.append(c)
                                 visited.add(c)
@@ -179,7 +181,7 @@ class Maze:
                         raise ValueError(f"No path found from {src_coord} to {dst_coord}")
                     frontier = new_frontier
 
-                # Backtrack to find the path
+                # 回溯路径
                 step = map[dst_coord[1]][dst_coord[0]]
                 path = [dst_coord]
                 while step > 1:
@@ -192,23 +194,27 @@ class Maze:
             except ValueError:
                 attempt += 1
                 print(f"Pathfinding failed. Retrying... (Attempt {attempt}/{retries})")
-                dst_coord = self.get_random_valid_destination()  # Choose a new destination
+                dst_coord = self.get_random_valid_destination(src_coord)
 
-        # If all retries fail, raise an error
         raise ValueError(f"Failed to find path after {retries} retries.")
 
-    def get_random_valid_destination(self):
-        """
-        Generate a random valid destination coordinate within the maze.
-
-        Returns:
-            tuple: A valid destination coordinate (x, y).
-        """
+    def get_random_valid_destination(self, current_coord=None):
         while True:
-            random_coord = (random.randint(0, self.maze_width - 1), random.randint(0, self.maze_height - 1))
-            tile = self.tile_at(random_coord)
-            if not tile.collision:  # Ensure the tile is not a collision point
-                return random_coord
+            if current_coord:
+                random_coord = (
+                    current_coord[0] + random.randint(-5, 5),
+                    current_coord[1] + random.randint(-5, 5),
+                )
+            else:
+                random_coord = (
+                    random.randint(0, self.maze_width - 1),
+                    random.randint(0, self.maze_height - 1),
+                )
+            if 0 <= random_coord[0] < self.maze_width and 0 <= random_coord[1] < self.maze_height:
+                tile = self.tile_at(random_coord)
+                if not tile.collision:
+                    return random_coord
+
 
     def tile_at(self, coord):
         return self.tiles[coord[1]][coord[0]]
