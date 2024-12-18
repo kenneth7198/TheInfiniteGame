@@ -138,77 +138,33 @@ class Maze:
 
         self.logger = logger
 
-    def find_path(self, src_coord, dst_coord, retries=3):
-        """
-        Find a path from src_coord to dst_coord. If the path is blocked, retry with new coordinates.
-
-        Args:
-            src_coord (tuple): Source coordinate (x, y).
-            dst_coord (tuple): Destination coordinate (x, y).
-            retries (int): Number of retries allowed if no path is found.
-
-        Returns:
-            list: List of coordinates representing the path.
-
-        Raises:
-            ValueError: If no path can be found after retries.
-        """
-        attempt = 0
-        while attempt <= retries:
-            try:
-                # Initialize map and variables
-                map = [[0 for _ in range(self.maze_width)] for _ in range(self.maze_height)]
-                frontier, visited = [src_coord], set()
-                map[src_coord[1]][src_coord[0]] = 1
-
-                # Pathfinding loop
-                while map[dst_coord[1]][dst_coord[0]] == 0:
-                    new_frontier = []
-                    for f in frontier:
-                        for c in self.get_around(f):
-                            if (
-                                0 <= c[0] < self.maze_width
-                                and 0 <= c[1] < self.maze_height
-                                and map[c[1]][c[0]] == 0
-                                and c not in visited
-                            ):
-                                map[c[1]][c[0]] = map[f[1]][f[0]] + 1
-                                new_frontier.append(c)
-                                visited.add(c)
-                    if not new_frontier:
-                        raise ValueError(f"No path found from {src_coord} to {dst_coord}")
-                    frontier = new_frontier
-
-                # Backtrack to find the path
-                step = map[dst_coord[1]][dst_coord[0]]
-                path = [dst_coord]
-                while step > 1:
-                    for c in self.get_around(path[-1]):
-                        if map[c[1]][c[0]] == step - 1:
-                            path.append(c)
-                            break
-                    step -= 1
-                return path[::-1]
-            except ValueError:
-                attempt += 1
-                print(f"Pathfinding failed. Retrying... (Attempt {attempt}/{retries})")
-                dst_coord = self.get_random_valid_destination()  # Choose a new destination
-
-        # If all retries fail, raise an error
-        raise ValueError(f"Failed to find path after {retries} retries.")
-
-    def get_random_valid_destination(self):
-        """
-        Generate a random valid destination coordinate within the maze.
-
-        Returns:
-            tuple: A valid destination coordinate (x, y).
-        """
-        while True:
-            random_coord = (random.randint(0, self.maze_width - 1), random.randint(0, self.maze_height - 1))
-            tile = self.tile_at(random_coord)
-            if not tile.collision:  # Ensure the tile is not a collision point
-                return random_coord
+    def find_path(self, src_coord, dst_coord):
+        map = [[0 for _ in range(self.maze_width)] for _ in range(self.maze_height)]
+        frontier, visited = [src_coord], set()
+        map[src_coord[1]][src_coord[0]] = 1
+        while map[dst_coord[1]][dst_coord[0]] == 0:
+            new_frontier = []
+            for f in frontier:
+                for c in self.get_around(f):
+                    if (
+                        0 < c[0] < self.maze_width - 1
+                        and 0 < c[1] < self.maze_height - 1
+                        and map[c[1]][c[0]] == 0
+                        and c not in visited
+                    ):
+                        map[c[1]][c[0]] = map[f[1]][f[0]] + 1
+                        new_frontier.append(c)
+                        visited.add(c)
+            frontier = new_frontier
+        step = map[dst_coord[1]][dst_coord[0]]
+        path = [dst_coord]
+        while step > 1:
+            for c in self.get_around(path[-1]):
+                if map[c[1]][c[0]] == step - 1:
+                    path.append(c)
+                    break
+            step -= 1
+        return path[::-1]
 
     def tile_at(self, coord):
         return self.tiles[coord[1]][coord[0]]
