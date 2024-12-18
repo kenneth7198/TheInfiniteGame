@@ -407,9 +407,6 @@ class Agent:
         if tuple(self.coord) in target_tiles:
             return []
 
-        # 日誌記錄原始目標
-        self.logger.debug(f"Original target_tiles: {target_tiles}")
-
         # 檢查目標座標的有效性
         def _ignore_target(t_coord):
             if list(t_coord) == list(self.coord):
@@ -419,15 +416,10 @@ class Agent:
                 return True
             return False
 
-        # 過濾無效目標
+        # 檢查並過濾有效的目標
         target_tiles = [t for t in target_tiles if not _ignore_target(t)]
-        self.logger.debug(f"Filtered target_tiles: {target_tiles}")
-
-        # 提供預設目標（Fallback Target）
         if not target_tiles:
-            fallback_target = self.coord  # 回到當前位置作為備選
-            self.logger.warning(f"No valid target tiles available. Using fallback target: {fallback_target}")
-            return [fallback_target]
+            raise ValueError("No valid target tiles available.")
 
         # 如果目標數量超過 4，隨機選擇 4 個進行計算
         if len(target_tiles) >= 4:
@@ -437,6 +429,7 @@ class Agent:
         pathes = {t: self.maze.find_path(self.coord, t) for t in target_tiles}
         target = min(pathes, key=lambda p: len(pathes[p]))
         return pathes[target][1:]
+
 
     def _determine_action(self):
         self.logger.info("{} is determining action...".format(self.name))
